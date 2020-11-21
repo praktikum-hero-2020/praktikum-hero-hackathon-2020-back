@@ -7,18 +7,6 @@ from pathlib import Path
 from django.shortcuts import get_object_or_404
 
 
-csv_trans=os.path.join('trans.csv')
-data_trans = csv.reader(open(csv_trans, encoding='utf-8'), delimiter = ',')
 
-
-summs = []
-for row in data_trans:
-    summs.append(row[4])
-
-for item in summs:
-    try:
-        int(item)
-    except:
-        float(item)
-        print(item)
-        print(dir(item.index))
+date = '2019-09-28 13:31:30'
+dt_fmt = 

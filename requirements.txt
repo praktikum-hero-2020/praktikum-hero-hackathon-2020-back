@@ -5,3 +5,5 @@ sqlparse==0.4.1
 djangorestframework==3.12.1
 djangorestframework-simplejwt==4.3.0 
 pyjwt==1.7.1
+numpy==1.19.3
+catboost==0.24.3
