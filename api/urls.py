@@ -10,4 +10,5 @@ urlpatterns = [
     path('pet/', views.PetCard.as_view()), # post (id)
     path('hb/', views.HappyPet.as_view()), # get
     path('popular/', views.Popular.as_view()),
+    path('ping/', views.ping),
 ]

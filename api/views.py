@@ -95,7 +95,7 @@ class PetCard(generics.GenericAPIView):
             print('Вероятность того, что питомца заберут:' , round(result[1], 3) * 100, "%")
 
         return JsonResponse({"percentage":f'{round(result[1], 3)*100}', "donats":donates_to_pet, "profile_link":pet.profile_link,
-            "gender":pet.gender.gender, "type_of_pet":pet.type_of_pet.pets_type})
+            "gender":pet.gender.gender, "type_of_pet":pet.type_of_pet.pets_type, 'id':pet.id, 'name':pet.name})
         
 
 class HappyPet(generics.GenericAPIView):
@@ -116,3 +116,7 @@ class Popular(generics.GenericAPIView):
         high = list(all_pets.filter(in_favorites__range=[10, 1000000000]).values('id', 'name'))
         # print(list(low)[:10])
         return JsonResponse({"low":low[:10], "average":average[:10], "high":high[:10]})
+
+
+def ping():
+    return JsonResponse({'ping?':'pong'})
