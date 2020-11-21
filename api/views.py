@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
 from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
-from dateutil.relativedelta import relativedelta
+# from dateutil.relativedelta import relativedelta
 
 from .models import Pets, Transactions
 
@@ -101,11 +101,17 @@ class PetCard(generics.GenericAPIView):
 class HappyPet(generics.GenericAPIView):
     ''' отправка инфы о днях рождения pets - сегодня, week-pets в течении недели'''
     def get(self, request):
-        pets = Pets.objects.filter(date_of_birth__day=dt.date.today().day, date_of_birth__month=dt.date.today().month).values('id', 'name')
+        # print(dir(request))
+        pets = list(Pets.objects.filter(date_of_birth__day=dt.date.today().day, date_of_birth__month=dt.date.today().month).values('id', 'name'))
         days = [23, 24, 25, 26, 27, 28, 29, 30] # костыль. не хватило времени
-        week_pets = Pets.objects.filter(date_of_birth__day__in=days, date_of_birth__month=dt.date.today().month).values('id', 'name')
-        return JsonResponse({"today":list(pets), "in week":list(week_pets)})
+        week_pets = list(Pets.objects.filter(date_of_birth__day__in=days, date_of_birth__month=dt.date.today().month).values('id', 'name'))
+        return JsonResponse({"today":pets, "in week":week_pets})
 
+    def options(self, request):
+        pets = list(Pets.objects.filter(date_of_birth__day=dt.date.today().day, date_of_birth__month=dt.date.today().month).values('id', 'name'))
+        days = [23, 24, 25, 26, 27, 28, 29, 30] # костыль. не хватило времени
+        week_pets = list(Pets.objects.filter(date_of_birth__day__in=days, date_of_birth__month=dt.date.today().month).values('id', 'name'))
+        return JsonResponse({"today":pets, "in week":week_pets})
 
 class Popular(generics.GenericAPIView):
     ''' вывод списка популярных'''
