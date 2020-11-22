@@ -48,7 +48,8 @@ class PetCategory(generics.GenericAPIView):
 class PetCard(generics.GenericAPIView):
 
     def post(self, request):
-        # print(request.data['pet_id'])
+        print(request.data['pet_id'])
+        print(request.data)
         model = pickle.load(open('heroes.sav', 'rb'))
         # loaded_info = [0,1,1,1,0,0,1000,2]
         # порода, кошка/собака, пол, в фаворитах/нет, заявка на забор, заявка на прогулку, сумма пожертвований общая, количество пожертвований
